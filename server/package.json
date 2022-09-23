@@ -2,9 +2,11 @@
   "name": "voluntarily",
   "version": "0.0.1",
   "description": "A platform for connecting the members of a NGO.",
-  "main": "server/index.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node server/index.js"
+    "start": "node index.js",
+	"tsmon": "tsc --watch",
+	"nodemon": "nodemon ./build/index.js"
   },
   "repository": {
     "type": "git",
