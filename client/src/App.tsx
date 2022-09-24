@@ -1,3 +1,4 @@
+import './reset.css';
 import './App.css';
 import { HomePage } from './pages/HomePage';
 import { RegistrationPage } from './pages/RegistrationPage';

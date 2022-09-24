@@ -1,5 +1,6 @@
 import "./NavBar.css"
+import { Logo } from "./Logo";
 
 export const NavBar = () => {
-    return (<div>navbar</div>);
+    return (<header id="navbar"><Logo width="50" height="50"/></header>);
 }
