@@ -1,6 +1,10 @@
 @use './variables/Palette.scss';
+@use './variables/Responsive.scss';
 
 #navbar {
     background-color: Palette.$black;
     color: Palette.$white;
+    @include Responsive.phone {
+        background-color:Palette.$purple !important
+    };
 }

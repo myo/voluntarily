@@ -1,0 +1,13 @@
+//https://habr.com/en/sandbox/163605/
+
+@mixin phone {
+    @media (pointer: coarse)  {
+        @content
+    };
+}
+
+@mixin desktop {
+    @media (pointer: fine) {
+        @content
+    };
+}
