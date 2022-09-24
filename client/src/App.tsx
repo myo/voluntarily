@@ -1,5 +1,4 @@
-import './reset.css';
-import './App.css';
+import './App.scss';
 import { HomePage } from './pages/HomePage';
 import { RegistrationPage } from './pages/RegistrationPage';
 import { BrowserRouter as Router, Routes, Route, useNavigate} from 'react-router-dom';

@@ -1,0 +1,6 @@
+@use 'Palette';
+
+#navbar {
+    background-color: Palette.$black;
+    color: Palette.$white;
+}

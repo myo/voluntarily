@@ -1,4 +1,4 @@
-import "./TextBox.css"
+import "./TextBox.scss"
 interface Props {
     name: string,
     placeholder?: string
