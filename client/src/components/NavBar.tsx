@@ -1,4 +1,4 @@
-import "./NavBar.scss"
+import "./styles/NavBar.scss"
 import { Logo } from "./Logo";
 
 export const NavBar = () => {

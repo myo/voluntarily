@@ -1,7 +1,6 @@
-import './App.scss';
 import { HomePage } from './pages/HomePage';
 import { RegistrationPage } from './pages/RegistrationPage';
-import { BrowserRouter as Router, Routes, Route, useNavigate} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import { NavBar } from './components/NavBar';
 
 function App() {

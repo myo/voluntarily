@@ -1,4 +1,4 @@
-@use 'Palette';
+@use './variables/Palette.scss';
 
 #navbar {
     background-color: Palette.$black;
