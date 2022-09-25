@@ -1,7 +1,7 @@
 //https://habr.com/en/sandbox/163605/
 
 @mixin phone {
-    @media (pointer: coarse)  {
+    @media (max-width:800px) or (pointer: coarse) {
         @content
     };
 }

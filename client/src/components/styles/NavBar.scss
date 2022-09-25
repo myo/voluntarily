@@ -1,10 +1,32 @@
 @use './variables/Palette.scss';
 @use './variables/Responsive.scss';
 
-#navbar {
+#NavBar {
+    display:flex;
+    position: relative;
+    justify-content: flex-start;
+    flex-direction: row;
     background-color: Palette.$black;
     color: Palette.$white;
+    height: 3em;
+    user-select: none;
+    svg {
+        flex: 0 1 auto;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    #ConnectArea {
+        flex: 0 1 auto;
+        margin: 1em 1em 1em auto; //clockwise
+        #ConnectButton, #RegisterButton {
+            text-decoration: none;
+            color: Palette.$white;
+        }
+    }
     @include Responsive.phone {
-        background-color:Palette.$purple !important
+        svg {
+            left: 1.5em;
+        }
     };
 }
