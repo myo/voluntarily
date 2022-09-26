@@ -1,14 +1,14 @@
 import "./styles/Loading.scss";
 
-function Loading({zIndex, text}: {zIndex: number, text: string}) {
+function Loading({zIndex=1, text, opacity=0.2, width="100%", height="100%"}: {zIndex?: number, text: string, opacity?: number, width?: string, height?:string}) {
   return (
     <div
       style={{
         width: "100%",
         height: "100%",
         position: "absolute",
-        backgroundColor: "rgba(0, 0, 0, 0.2)",
-        zIndex: zIndex || 1,
+        backgroundColor: "rgba(0, 0, 0, " + opacity + ")",
+        zIndex: zIndex,
       }}
     >
       <div

@@ -1,7 +1,7 @@
 @use './variables/Palette.scss';
 @use './variables/Responsive.scss';
 
-#NavBar {
+#NavBarContainer {
     display:flex;
     position: relative;
     justify-content: flex-start;
@@ -29,4 +29,14 @@
             left: 1.5em;
         }
     };
+}
+
+#NavBarTopRibbon {
+    height: 0.15em;
+    background-color: Palette.$purple;
+}
+
+#NavBarBottomRibbon {
+    height: 0.15em;
+    background-color: Palette.$blue;
 }
