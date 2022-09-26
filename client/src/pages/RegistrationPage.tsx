@@ -1,8 +1,8 @@
-import "./styles/RegistrationPage.scss"
+import "./styles/ConnectPage.scss"
 import { TextBox } from "../components/TextBox";
 
 export const RegistrationPage = () => { return (
-    <form>
+    <form action={process.env.REACT_APP_API_URL + "/register"} method="POST">
         <TextBox name="name" placeholder="John Smith"></TextBox>
         <TextBox name="email" placeholder="youremail@gmail.com"></TextBox>
         <TextBox name="phone" placeholder="0720123456"></TextBox>
