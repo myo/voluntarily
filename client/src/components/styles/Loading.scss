@@ -1,0 +1,51 @@
+@use './variables/Palette.scss';
+@use './variables/Responsive.scss';
+
+.circle-loader2 {
+    fill: transparent;
+    stroke: Palette.$purple;
+    stroke-width: 2;
+    animation: dash 2s ease infinite, rotate2 2s linear infinite;
+    position: absolute;
+  }
+  .circle-loader {
+    fill: transparent;
+    stroke: Palette.$blue;
+    stroke-width: 2;
+    animation: dash 2s ease infinite, rotate 2s linear infinite;
+    position: absolute;
+  }
+  
+  @keyframes dash {
+    0% {
+      stroke-dasharray: 1, 99;
+      stroke-dashoffset: 0;
+    }
+    50% {
+      stroke-dasharray: 45, 55;
+      stroke-dashoffset: 0;
+    }
+    100% {
+      stroke-dasharray: 1, 99;
+      stroke-dashoffset: -99;
+    }
+  }
+  
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes rotate2 {
+    0% {
+      transform: rotate(-180deg);
+    }
+    100% {
+      transform: rotate(180deg);
+    }
+  }
+  
