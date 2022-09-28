@@ -1,3 +1,5 @@
+import { AxiosInstance } from "axios";
+
 export enum ActionType {
     LOADING_COMPLETE,
     USER_REGISTRATION_START,
@@ -8,6 +10,8 @@ export enum ActionType {
     USER_LOGIN_ERROR,
 }
 export interface IState {
+    token: string,
+    axiosWithBearer?: AxiosInstance | undefined,
     isLoading: boolean,
     showError: boolean,
     errorMessage: string,

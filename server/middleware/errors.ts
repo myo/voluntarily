@@ -1,8 +1,24 @@
 const fs = require('fs');
 import express from "express";
 
+class ExpressError extends Error {
+    public status: number;
+    public message: string;
+    constructor (status: number = 401, message:string = "UNAUTHORIZED") {
+        super(message);
+        this.status = status;
+        this.message = message;
+    }
+}
+
+export class UnauthorizedError extends ExpressError {
+    constructor (message: string) {
+        super(401, message);
+    }
+}
+
 export const notFoundHandler = (req: express.Request, res: express.Response) => {
-    res.status(404).send("Specified API endpoint does not exist.");
+    res.status(404).json({message: "Specified API endpoint does not exist."});
 
     //this is handling 404s for api calls, which will be usually
     //because of curious users fiddling around with our service,
@@ -20,6 +36,6 @@ export const notFoundHandler = (req: express.Request, res: express.Response) => 
     });
 };
 
-export const errorHandler = (err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
-    res.json(err);
+export const errorHandler = (err: ExpressError, req: express.Request, res: express.Response, next: express.NextFunction) => {
+    res.status(err.status || 401).json({...err, message: err.message});
 };

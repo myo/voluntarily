@@ -1,3 +1,4 @@
+import axios from "axios";
 import {IState, IAction, ActionType} from "./AppTypes";
 
 export const reducer = (state: IState, action: IAction) : IState => {
@@ -12,6 +13,10 @@ export const reducer = (state: IState, action: IAction) : IState => {
         case (ActionType.USER_REGISTRATION_ERROR):
         case (ActionType.USER_LOGIN_ERROR): {
             return {...state, isLoading: false, showError: true, errorMessage: action.payload};
+        }
+        case (ActionType.USER_REGISTRATION_SUCCESS):
+        case (ActionType.USER_LOGIN_SUCCESS): {
+            return {...state, isLoading: false, showError: false, token: action.payload, axiosWithBearer: axios.create({headers: {"Authorization": "Bearer " + action.payload}})}
         }
     }
     return state;
