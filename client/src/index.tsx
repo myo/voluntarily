@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import { AppProvider } from './context/AppContext';
 
-import './reset.css';
+import './reset.scss';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

@@ -1,6 +1,7 @@
 @use "../../components/styles/variables/Palette";
 @use "../../components/styles/variables/Responsive";
 
+.connect {
 form {
     display:flex;
     flex-direction:column;
@@ -12,10 +13,10 @@ form {
             margin-top: 1.5em;
         }
         label {
-            margin-left: 0px;
             width: 6em;
         }
         input {
+            margin-left:3em;
             width: 12em;
         }
     }
@@ -25,8 +26,9 @@ form {
         margin-top: 1.5em;
         border: none;
         height: 3em;
-        width: 12em + 6em + 2em;
+        width: 12em + 6em + 2em + 3em;
         background-color: Palette.$black;
         color: Palette.$white;
     }
+}
 }

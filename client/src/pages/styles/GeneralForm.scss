@@ -1,0 +1,50 @@
+@use "../../components/styles/variables/Palette";
+@use "../../components/styles/variables/Responsive";
+
+$margin-inbetween: 1.5em;
+$submit-width: 70%;
+
+form {
+    margin: 1em 3em 0em 3em;
+    .TextBoxComponent {
+        display:flex;
+        label, input {
+            margin-top: $margin-inbetween;
+        }
+        label {
+            margin-left: 0px;
+            flex: 0 1 25%;
+        }
+        input {
+            height: 3em;
+            margin-left: 1em;
+            flex: 1;
+        }
+    }
+    .RichBoxComponent {
+        display:flex;
+        flex-direction: column;
+        label, input {
+            margin-top: $margin-inbetween;
+        }
+        label {
+            text-align: center;
+            width: 100%;
+        }
+        textarea {
+            margin-top: 0.5em;
+            width: 100%;
+        }
+    }
+    
+
+    input[type="submit"] {
+        margin-top: $margin-inbetween;
+        border: none;
+        height: 3em;
+        width: $submit-width;
+        margin: $margin-inbetween calc((100% - $submit-width) / 2) $margin-inbetween calc((100% - $submit-width) / 2);
+        background-color: Palette.$black;
+        color: Palette.$white;
+    }
+}

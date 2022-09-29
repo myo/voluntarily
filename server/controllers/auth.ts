@@ -11,14 +11,18 @@ export const checkPassword = (existingUser: any, givenPassword: string) => {
     return hashedPassword == existingUser.password;
 };
 
+const authorize = (user: any, res: express.Response) => {
+    const token = bakeJWT({uid: user._id});
+    res.status(200).json({token: token, user: {username: user.username, email: user.email, isAdmin: user.isAdmin, isMod: user.isMod, isVerified: user.isVerified, isBanned: user.isBanned }});
+}
+
 export const signIn = async(req: express.Request, res: express.Response) => {
     const {email, password} = req.body;
 
     const existingUser = await MUser.findOne({email: email});
     
     if (existingUser && checkPassword(existingUser, password)) {
-        const token = bakeJWT({uid: existingUser._id});
-        res.status(200).json({token: token});
+        authorize(existingUser, res);
     }
     throw new UnauthorizedError("Wrong email or password.");
 }
@@ -30,8 +34,7 @@ export const signUp = async (req: express.Request, res: express.Response) => {
     const hashedPassword = crypto.createHash('sha256').update(password + salt).digest('hex');
 
     const newUser = await MUser.create({email: email, phone: phone, password: hashedPassword, salt: salt});
-    const token = bakeJWT({uid: newUser._id});
     newUser.save();
-    res.status(200).json({token: token});
 
+    authorize(newUser, res);
 }

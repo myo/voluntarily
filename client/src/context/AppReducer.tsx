@@ -16,7 +16,7 @@ export const reducer = (state: IState, action: IAction) : IState => {
         }
         case (ActionType.USER_REGISTRATION_SUCCESS):
         case (ActionType.USER_LOGIN_SUCCESS): {
-            return {...state, isLoading: false, showError: false, token: action.payload, axiosWithBearer: axios.create({headers: {"Authorization": "Bearer " + action.payload}})}
+            return {...state, isLoading: false, showError: false, token: action.payload.token, user: action.payload.user, axiosWithBearer: axios.create({headers: {"Authorization": "Bearer " + action.payload.token}})}
         }
     }
     return state;
