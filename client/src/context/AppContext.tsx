@@ -21,10 +21,11 @@ export const AppContext = createContext<AppContextType>({state: initialState, di
 export const AppProvider = ({children}: {children: React.ReactNode}): JSX.Element => {
     const [state, dispatch] = useReducer(reducer, initialState);
     const SetupUser = (type: ActionType, payload: any) => {
-        //reducer loads both token and payload
-        //and creates axiosWithBearer
         dispatch({type: type, payload: payload});
-        localStorage.setItem("token", payload.token);
+        if (payload.token)
+        {
+            localStorage.setItem("token", payload.token);
+        }
         localStorage.setItem("user", JSON.stringify(payload.user))
     }
 

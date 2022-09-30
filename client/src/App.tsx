@@ -7,6 +7,7 @@ import Loading from './components/Loading';
 import { useAppContext } from './context/AppContext';
 import { ActionType } from './context/AppTypes';
 import { CreateProfilePage } from './pages/CreateProfilePage';
+import { UploadPortraitPage } from './pages/UploadPortraitPage';
 
 function App() {
   const appCtx = useAppContext();
@@ -25,6 +26,7 @@ function App() {
           <Route path="/" element={<HomePage/>}/>
           <Route path="/members">
             <Route path="create-profile" element={<CreateProfilePage/>}/>
+            <Route path="upload-portrait" element={<UploadPortraitPage/>}/>
           </Route>
           <Route path="/register" element={<RegistrationPage/>}/>
           <Route path="/login" element={<LoginPage/>}/>

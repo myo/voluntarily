@@ -1,14 +1,50 @@
 import express from "express";
 
-import {MUser} from '../models/user';
-import Member from '../models/member';
+import { MUser } from '../models/user';
+import { MMember } from '../models/member';
+import { RequestWithUser } from "../types";
+import { UnauthorizedError } from "../middleware/errors";
 
 export const getProfile = (req: express.Request, res: express.Response) => {
     res.send("getProfile NOT IMPLEMENTED");
 }
 
-export const createProfile = (req: express.Request, res: express.Response) => {
-    res.send("createProfile NOT IMPLEMENTED.");
+export const createProfile = async (req: RequestWithUser, res: express.Response) => {
+    const {name, familyName, job, highschool, faculty, facebook, instagram, description, previousVolunteering} = req.body;
+
+    if (!name?.length || !familyName?.length) {
+        res.json({message: "Please fill in your name."});
+        return;
+    }
+
+    let newUserName = name + "-" + familyName;
+    newUserName = newUserName.toLowerCase();
+
+    const user = await MUser.findOne({_id: req.user?.uid});
+
+    if (!user) {
+        throw new UnauthorizedError("You are not logged in.");
+    }
+
+    if (user.username?.length > 1) {
+        res.json({message: "You have already created your profile."})
+        return;
+    }
+
+    const userNameExists = await MUser.findOne({username: newUserName});
+
+    if (userNameExists)
+    {
+        const now = Date.now().toString().split("");
+        newUserName += now[now.length - 3] + now[now.length - 2] + now[now.length - 1];
+    }
+    
+    user.username = newUserName;
+    user.save();
+    const profile = await MMember.create({ownerId: req.user?.uid, ownerUserName: newUserName, name: name, familyName: familyName, job: job, highschool: highschool, faculty: faculty, facebook: facebook, instagram: instagram, description: description, previousVolunteering: previousVolunteering});
+    profile.save();
+
+    res.json({user: {username: user.username, name: name, familyName: familyName, portrait: profile.portrait, email: user.email, isAdmin: user.isAdmin, isMod: user.isMod, isVerified: user.isVerified, isBanned: user.isBanned }});
 }
 
 export const editProfile = (req: express.Request, res: express.Response) => {
@@ -19,6 +55,12 @@ export const signUpForEvent = (req: express.Request, res: express.Response) => {
     res.send("signUpForEvent NOT IMPLEMENTED.");
 }
 
-export const uploadPicture = (req: express.Request, res: express.Response) => {
-    res.send("uploadPicture NOT IMPLEMENTED.");
+export const uploadPortrait = (req: express.Request, res: express.Response) => {
+    console.log(req.file, req.body);
+
+    if (req.file)
+    res.json({file: req.file, body: req.body});
+    else {
+        console.log(req.file);
+    }
 }

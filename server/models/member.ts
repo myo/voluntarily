@@ -1,14 +1,21 @@
 import {Schema, model} from 'mongoose'
 
 interface IMember {
-    ownerId: number;
+    ownerId: string,
+    ownerUserName: string,
     name: string,
-    slug: string,
+    familyName: string,
+    portrait: string,
+    facebook: string,
+    instagram: string,
+    job: string | undefined,
+    highschool: string | undefined,
+    faculty: string | undefined,
     isVerified: boolean,
     isActive: boolean,
     isAlumni: boolean,
     description: string,
-    image: string,
+    previousVolunteering: string,
     rank: string,
     previousRanks: Array<string>,
     memberSince: Date,
@@ -19,14 +26,21 @@ interface IMember {
 
 const SMember = new Schema<IMember>(
     {
-        ownerId: {type: Number, default: -1, unique: true},
-        name: {type: String, default: "", maxlength: 60},
-        slug: {type: String, default: ""},
+        ownerId: {type: String, default: "", unique: true},
+        ownerUserName: {type: String, default: ""},
+        name: {type: String, default: "", maxlength: 32},
+        familyName: {type: String, default: "", maxlength: 32},
+        portrait: {type: String, default: ""},
+        facebook: {type: String, default: "", maxlength: 72},
+        instagram: {type: String, default: "", maxlength: 72},
+        job: {type: String, default: undefined, maxlength: 72},
+        highschool: {type: String, default: undefined, maxlength: 72},
+        faculty: {type: String, default: undefined, maxlength: 72},
         isVerified: {type: Boolean, default: false},
         isActive: {type: Boolean, default: true},
         isAlumni: {type: Boolean, default: false},
         description: {type: String, default: "", maxlength: 500},
-        image: {type: String, default: ""},
+        previousVolunteering: {type: String, default: "", maxlength: 500},
         rank: {type: String, default: "Voluntar"},
         previousRanks: [{type: String, default: ""}],
         memberSince: {type: Date, default: Date.now},
@@ -41,6 +55,4 @@ const SMember = new Schema<IMember>(
     }
 );
 
-const MMeber = model<IMember>('Member', SMember);
-
-export default model;
+export const MMember = model('Member', SMember);

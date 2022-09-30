@@ -1,7 +1,9 @@
 import { AxiosInstance } from "axios";
 
 export enum ActionType {
+    LOADING_START,
     LOADING_COMPLETE,
+    UPDATE_USER,
     USER_REGISTRATION_START,
     USER_REGISTRATION_SUCCESS,
     USER_REGISTRATION_ERROR,

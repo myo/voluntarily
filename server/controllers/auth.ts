@@ -5,15 +5,17 @@ import {IUser, MUser} from '../models/user';
 
 import { bakeJWT } from "../middleware/jwt";
 import { UnauthorizedError } from "../middleware/errors";
+import { MMember } from "../models/member";
 
 export const checkPassword = (existingUser: any, givenPassword: string) => {
     const hashedPassword = crypto.createHash('sha256').update(givenPassword + existingUser.salt).digest('hex');
     return hashedPassword == existingUser.password;
 };
 
-const authorize = (user: any, res: express.Response) => {
+const authorize = async(user: any, res: express.Response) => {
     const token = bakeJWT({uid: user._id});
-    res.status(200).json({token: token, user: {username: user.username, email: user.email, isAdmin: user.isAdmin, isMod: user.isMod, isVerified: user.isVerified, isBanned: user.isBanned }});
+    const profile = await MMember.findOne({ownerId: user._id});
+    res.status(200).json({token: token, user: {username: user.username, portrait: profile?.portrait, name: profile?.name, familyName: profile?.familyName, email: user.email, isAdmin: user.isAdmin, isMod: user.isMod, isVerified: user.isVerified, isBanned: user.isBanned }});
 }
 
 export const signIn = async(req: express.Request, res: express.Response) => {
@@ -22,7 +24,7 @@ export const signIn = async(req: express.Request, res: express.Response) => {
     const existingUser = await MUser.findOne({email: email});
     
     if (existingUser && checkPassword(existingUser, password)) {
-        authorize(existingUser, res);
+        await authorize(existingUser, res);
     }
     throw new UnauthorizedError("Wrong email or password.");
 }
@@ -36,5 +38,5 @@ export const signUp = async (req: express.Request, res: express.Response) => {
     const newUser = await MUser.create({email: email, phone: phone, password: hashedPassword, salt: salt});
     newUser.save();
 
-    authorize(newUser, res);
+    await authorize(newUser, res);
 }

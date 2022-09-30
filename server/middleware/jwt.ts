@@ -15,7 +15,7 @@ export const verifyJWT = (req: RequestWithUser, res: express.Response, next: exp
     try {
         const payload : PayloadWithBakedContents = 
             jwt.verify(authHeader[1], process.env.JWT_SECRET || "") as PayloadWithBakedContents;
-        req.user = {userId: payload.userId};
+        req.user = {uid: payload.uid};
         next();
     }
     catch (e: any) {

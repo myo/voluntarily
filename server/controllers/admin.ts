@@ -1,7 +1,7 @@
 import express from "express";
 
 import {MUser} from '../models/user';
-import Member from '../models/member';
+import {MMember} from '../models/member';
 import Badge from '../models/badge';
 
 export const createBadge = (req: express.Request, res: express.Response) => {

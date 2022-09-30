@@ -3,8 +3,14 @@ import {IState, IAction, ActionType} from "./AppTypes";
 
 export const reducer = (state: IState, action: IAction) : IState => {
     switch(action.type) {
+        case (ActionType.LOADING_START): {
+            return {...state, isLoading: true};
+        }
         case (ActionType.LOADING_COMPLETE): {
             return {...state, isLoading: false};
+        }
+        case (ActionType.UPDATE_USER): {
+            return {...state, user: action.payload.user};
         }
         case (ActionType.USER_REGISTRATION_START):
         case (ActionType.USER_LOGIN_START): {

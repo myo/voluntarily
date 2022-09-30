@@ -10,10 +10,13 @@ export const HomePage = () => {
     useEffect(() => {
         if (appContext.state.token?.length > 0)
         {
-            if (!appContext.state.user?.username?.length)
-            {
+            if (!appContext.state.user?.username?.length) {
                 navigator("/members/create-profile");
             }
+            else if (!appContext.state.user?.portrait.length) {
+                navigator("/members/upload-portrait");
+            }
+            
         }
     });
     return <div><Loading text="Loading..." opacity={0} height="calc(100% - 3em)"/></div>

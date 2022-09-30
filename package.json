@@ -3,9 +3,8 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-	  "start": "concurrently --kill-others-on-fail \"npm run start --prefix client\" \"npm run tsmon --prefix server\" \"npm run nodemon --prefix server\"",
+    "start": "concurrently --kill-others-on-fail \"npm run start --prefix client\" \"npm run tsmon --prefix server\" \"npm run nodemon --prefix server\"",
     "start-mongodb": "\"C:\\Program Files\\MongoDB\\Server\\6.0\\bin\\mongod.exe\" --dbpath ./db/"
-  
   },
   "repository": {
     "type": "git",
@@ -17,6 +16,8 @@
   },
   "homepage": "https://github.com/myo/voluntarily#readme",
   "dependencies": {
-    "concurrently": "^7.4.0"
+    "@types/react-dropzone": "^5.1.0",
+    "concurrently": "^7.4.0",
+    "react-dropzone": "^14.2.2"
   }
 }
