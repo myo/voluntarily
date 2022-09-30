@@ -27,7 +27,7 @@ export const UploadPortraitPage = () => {
     };
     return (<form onSubmit={submitHandler}>
         <div className="RichBoxComponent">
-            <label>One last thing and we're ready! Please upload a selfie below.</label>
+            <label>One last thing and we're ready! Please upload a selfie to use as profile picture below.</label>
             <input type="file" accept="image/*" onChange={photoHandler}></input>
         </div>
     </form>);
