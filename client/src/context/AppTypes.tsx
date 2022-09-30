@@ -30,5 +30,5 @@ export type UserSetupPayload = {
 export type AppContextType = {
     state: IState, 
     dispatch: React.Dispatch<any>,
-    SetupUser: (type: ActionType, payload: UserSetupPayload) => void,
+    SetupUser: (type: ActionType, payload: UserSetupPayload, replaceExisting?: boolean) => void,
 };

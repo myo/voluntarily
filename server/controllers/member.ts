@@ -55,12 +55,16 @@ export const signUpForEvent = (req: express.Request, res: express.Response) => {
     res.send("signUpForEvent NOT IMPLEMENTED.");
 }
 
-export const uploadPortrait = (req: express.Request, res: express.Response) => {
+export const uploadPortrait = async(req: RequestWithUser, res: express.Response) => {
     console.log(req.file, req.body);
 
-    if (req.file)
-    res.json({file: req.file, body: req.body});
-    else {
-        console.log(req.file);
+    if (req.file) {
+        const profile = await MMember.findOne({ownerId: req.user?.uid});
+        if (!profile) {
+            throw new UnauthorizedError("INVALID SESSION.");
+        }
+        profile.portrait = req.file?.filename;
+        profile.save();
+        res.json({user: {portrait: req.file?.filename}});
     }
 }
