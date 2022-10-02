@@ -16,31 +16,13 @@ const initialState : IState = {
     errorMessage: "",
 };
 
-export const AppContext = createContext<AppContextType>({state: initialState, dispatch: () => {}, SetupUser: () => {}});
+export const AppContext = createContext<AppContextType>({state: initialState, dispatch: () => {}});
 
 export const AppProvider = ({children}: {children: React.ReactNode}): JSX.Element => {
     const [state, dispatch] = useReducer(reducer, initialState);
-    const SetupUser = (type: ActionType, payload: any, replaceExisting: boolean = true) => {
-        if (payload.token)
-        {
-            localStorage.setItem("token", payload.token);
-        }
-        if (replaceExisting)
-        {
-            const existingUser = JSON.parse(localStorage.getItem("user") || "false");
-            if (existingUser) {
-                const result = {...existingUser, ...payload.user};
-                localStorage.setItem("user", JSON.stringify(result));
-                dispatch({type: ActionType.UPDATE_USER, payload: {user: result}});
-                return;
-            }
-        }
-        localStorage.setItem("user", JSON.stringify(payload.user));
-        dispatch({type: type, payload: payload});
-    }
 
     return (
-    <AppContext.Provider value={{state, dispatch, SetupUser}}>
+    <AppContext.Provider value={{state, dispatch}}>
         {children}
     </AppContext.Provider>
     );

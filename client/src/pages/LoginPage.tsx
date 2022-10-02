@@ -24,7 +24,7 @@ export const LoginPage = () => {
 
         axios.post(process.env.REACT_APP_API_URL + "/api/v1/auth/login", connectData).then((res) => {
             if (res.data.token) {
-                appContext.SetupUser(ActionType.USER_LOGIN_SUCCESS, res.data, false);
+                appContext.dispatch({type: ActionType.UPDATE_USER, payload: res.data});
                 navigate("/");
             }
         });

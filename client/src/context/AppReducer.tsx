@@ -9,9 +9,6 @@ export const reducer = (state: IState, action: IAction) : IState => {
         case (ActionType.LOADING_COMPLETE): {
             return {...state, isLoading: false};
         }
-        case (ActionType.UPDATE_USER): {
-            return {...state, user: {...state.user, ...action.payload.user}};
-        }
         case (ActionType.USER_REGISTRATION_START):
         case (ActionType.USER_LOGIN_START): {
             return {...state, isLoading: true, showError: false};
@@ -20,9 +17,18 @@ export const reducer = (state: IState, action: IAction) : IState => {
         case (ActionType.USER_LOGIN_ERROR): {
             return {...state, isLoading: false, showError: true, errorMessage: action.payload};
         }
-        case (ActionType.USER_REGISTRATION_SUCCESS):
-        case (ActionType.USER_LOGIN_SUCCESS): {
-            return {...state, isLoading: false, showError: false, token: action.payload.token, user: action.payload.user, axiosWithBearer: axios.create({headers: {"Authorization": "Bearer " + action.payload.token}})}
+        case (ActionType.UPDATE_USER): {
+            const newUser = {...state.user, ...action.payload.user};
+            localStorage.setItem("user", JSON.stringify(newUser));
+
+            const result = {...state, user: newUser, isLoading: false, showError: false};
+            if (action.payload.token)
+            {
+                localStorage.setItem("token", action.payload.token);
+                result.token = action.payload.token;
+                result.axiosWithBearer = axios.create({headers: {"Authorization": "Bearer " + action.payload.token}});
+            }
+            return result;
         }
     }
     return state;

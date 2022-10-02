@@ -24,7 +24,7 @@ export const RegistrationPage = () => {
 
         axios.post(process.env.REACT_APP_API_URL + "/api/v1/auth/register", connectData).then((res) => {
             if (res.data.token) {
-                appContext.SetupUser(ActionType.USER_REGISTRATION_SUCCESS, res.data, false);
+                appContext.dispatch({type: ActionType.UPDATE_USER, payload: res.data});
                 navigate("/");
             }
         });

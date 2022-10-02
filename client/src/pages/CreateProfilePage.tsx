@@ -25,7 +25,7 @@ export const CreateProfilePage = () => {
 
         appContext.state.axiosWithBearer?.post(process.env.REACT_APP_API_URL + "/api/v1/member/create", profileData).then((res) => {
             if (res.data.user) {
-                appContext.SetupUser(ActionType.UPDATE_USER, res.data);
+                appContext.dispatch({type: ActionType.UPDATE_USER, payload: res.data});
                 navigate("/");
             }
         });
