@@ -10,7 +10,7 @@ export const reducer = (state: IState, action: IAction) : IState => {
             return {...state, isLoading: false};
         }
         case (ActionType.UPDATE_USER): {
-            return {...state, user: action.payload.user};
+            return {...state, user: {...state.user, ...action.payload.user}};
         }
         case (ActionType.USER_REGISTRATION_START):
         case (ActionType.USER_LOGIN_START): {
