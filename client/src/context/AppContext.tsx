@@ -1,13 +1,15 @@
 import {createContext, useContext, useReducer} from "react";
-import {IState, AppContextType, ActionType} from "./AppTypes";
+import {IState, AppContextType} from "./AppTypes";
 import {reducer} from "./AppReducer";
 import axios from "axios";
+import {getLanguage} from "../i18n";
 
 let storedToken = localStorage.getItem("token") || "";
 let storedUser = JSON.parse(localStorage.getItem("user") || "{}");
 let axiosWithBearer = storedToken.length > 0 ? axios.create({headers: {"Authorization": "Bearer " + storedToken}}) : undefined;
 
 const initialState : IState = {
+    language: getLanguage(),
     token: storedToken,
     user: storedUser,
     axiosWithBearer: axiosWithBearer,

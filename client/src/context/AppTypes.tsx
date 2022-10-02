@@ -8,8 +8,10 @@ export enum ActionType {
     USER_REGISTRATION_ERROR,
     USER_LOGIN_START,
     USER_LOGIN_ERROR,
+    SET_LANGUAGE,
 };
 export interface IState {
+    language: string,
     token: string,
     user: any,
     axiosWithBearer?: AxiosInstance | undefined,

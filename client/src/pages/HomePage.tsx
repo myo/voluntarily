@@ -2,7 +2,7 @@ import Loading from "../components/Loading";
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import {useAppContext} from "../context/AppContext";
-import { ActionType } from "../context/AppTypes";
+import { appStrings } from "../i18n";
 
 export const HomePage = () => {
     const appContext = useAppContext();
@@ -19,5 +19,5 @@ export const HomePage = () => {
             
         }
     });
-    return <div><Loading text="Loading..." opacity={0} height="calc(100% - 3em)"/></div>
+    return <div><Loading text={appStrings.loading} opacity={0} height="calc(100% - 3em)"/></div>
 };

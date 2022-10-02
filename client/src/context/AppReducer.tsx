@@ -1,5 +1,6 @@
 import axios from "axios";
 import {IState, IAction, ActionType} from "./AppTypes";
+import { setLanguage } from "../i18n";
 
 export const reducer = (state: IState, action: IAction) : IState => {
     switch(action.type) {
@@ -29,6 +30,10 @@ export const reducer = (state: IState, action: IAction) : IState => {
                 result.axiosWithBearer = axios.create({headers: {"Authorization": "Bearer " + action.payload.token}});
             }
             return result;
+        }
+        case (ActionType.SET_LANGUAGE): {
+            setLanguage(action.payload.language);
+            return {...state, language: action.payload.language}
         }
     }
     return state;

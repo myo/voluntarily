@@ -8,6 +8,7 @@ import { useAppContext } from './context/AppContext';
 import { ActionType } from './context/AppTypes';
 import { CreateProfilePage } from './pages/CreateProfilePage';
 import { UploadPortraitPage } from './pages/UploadPortraitPage';
+import { appStrings } from './i18n';
 
 function App() {
   const appCtx = useAppContext();
@@ -15,7 +16,7 @@ function App() {
   window.addEventListener("load", () => {appCtx.dispatch({type: ActionType.LOADING_COMPLETE})});
 
   if (appCtx.state.isLoading) {
-    return (<Loading text="Loading..." opacity={0}/>)
+    return (<Loading text={appStrings.loading} opacity={0}/>)
   }
 
   return (

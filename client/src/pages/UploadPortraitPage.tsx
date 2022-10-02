@@ -1,11 +1,9 @@
 import "./styles/GeneralForm.scss"
 import { AxiosInstance } from "axios";
-import {useState} from "react";
 import { useAppContext } from "../context/AppContext";
 import { ActionType } from "../context/AppTypes";
 import { useNavigate } from "react-router-dom";
-
-const initialState = {file: new File([], "", undefined)}
+import { userStrings } from "../i18n";
 
 export const UploadPortraitPage = () => {
     const appContext = useAppContext();
@@ -30,7 +28,7 @@ export const UploadPortraitPage = () => {
     };
     return (<form onSubmit={submitHandler}>
         <div className="RichBoxComponent">
-            <label>One last thing and we're ready! Please upload a selfie to use as profile picture below.</label>
+            <label>{userStrings.uploadProfilePicture}</label>
             <input type="file" accept="image/*" onChange={photoHandler}></input>
         </div>
     </form>);

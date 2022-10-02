@@ -5,6 +5,7 @@ import axios from "axios";
 import { AppContext } from '../context/AppContext';
 import { ActionType } from "../context/AppTypes";
 import { useNavigate } from 'react-router-dom'
+import { userStrings } from "../i18n";
 
 const initialState = { email: "", phone: "", password: "" };
 
@@ -33,10 +34,10 @@ export const RegistrationPage = () => {
     return (
     <div className="connect">
         <form onSubmit={submitHandler}>
-            <TextBox name="email" placeholder="youremail@gmail.com" value={connectData.email} onChange={changeHandler}></TextBox>
-            <TextBox name="phone" placeholder="0720123456" value={connectData.phone} onChange={changeHandler}></TextBox>
-            <TextBox type="password" name="password" value={connectData.password} onChange={changeHandler}></TextBox>
-            <input type="submit" value="join us!"></input>
+            <TextBox name="email" label={userStrings.email} placeholder="youremail@gmail.com" value={connectData.email} onChange={changeHandler}></TextBox>
+            <TextBox name="phone" label={userStrings.phone} placeholder="0720123456" value={connectData.phone} onChange={changeHandler}></TextBox>
+            <TextBox type="password" name="password" label={userStrings.password} value={connectData.password} onChange={changeHandler}></TextBox>
+            <input type="submit" value={userStrings.signup}></input>
         </form>
     </div>
     );
