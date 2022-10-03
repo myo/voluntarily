@@ -6,7 +6,7 @@ export const userStrings = new LocalizedStrings({
         phone: "phone",
         password: "password",
         connect: "connect",
-        signup: "join us!",
+        signUp: "join us!",
         name: "name",
         familyName: "family name",
         highschool: "highschool",

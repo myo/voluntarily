@@ -37,7 +37,7 @@ export const RegistrationPage = () => {
             <TextBox name="email" label={userStrings.email} placeholder="youremail@gmail.com" value={connectData.email} onChange={changeHandler}></TextBox>
             <TextBox name="phone" label={userStrings.phone} placeholder="0720123456" value={connectData.phone} onChange={changeHandler}></TextBox>
             <TextBox type="password" name="password" label={userStrings.password} value={connectData.password} onChange={changeHandler}></TextBox>
-            <input type="submit" value={userStrings.signup}></input>
+            <input type="submit" value={userStrings.signUp}></input>
         </form>
     </div>
     );

@@ -1,7 +1,7 @@
 import "./styles/NavBar.scss"
 import { Logo } from "./Logo";
-import { redirect } from "react-router-dom";
 import { useAppContext } from "../context/AppContext";
+import { userStrings } from "../i18n";
 
 export const NavBar = () => {
 
@@ -18,9 +18,9 @@ export const NavBar = () => {
                     <div id="ConnectArea">Hi {appContext.state.user.name}!</div> 
                 : 
                     <div id="ConnectArea">
-                        <a id="ConnectButton" href="/login">connect</a>
+                        <a id="ConnectButton" href="/login">{userStrings.connect}</a>
                         &nbsp;/&nbsp; 
-                        <a id="RegisterButton" href="/register">join us!</a>
+                        <a id="RegisterButton" href="/register">{userStrings.signUp}</a>
                     </div>
                 )}
             </div>
