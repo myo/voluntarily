@@ -22,7 +22,7 @@ export const NavBar = () => {
                 : 
                     <div id="ConnectArea">
                         <a id="ConnectButton" href="/login">{userStrings.connect}</a>
-                        <span>&nbsp;/&nbsp; </span>
+                        <span>/</span>
                         <a id="RegisterButton" href="/register">{userStrings.signUp}</a>
                     </div>
                 )}
