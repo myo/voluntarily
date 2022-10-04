@@ -1,28 +1,5 @@
 import {Schema, model} from 'mongoose'
-
-interface IMember {
-    ownerId: string,
-    ownerUserName: string,
-    name: string,
-    familyName: string,
-    portrait: string,
-    facebook: string,
-    instagram: string,
-    job: string | undefined,
-    highschool: string | undefined,
-    faculty: string | undefined,
-    isVerified: boolean,
-    isActive: boolean,
-    isAlumni: boolean,
-    description: string,
-    previousVolunteering: string,
-    rank: string,
-    previousRanks: Array<string>,
-    memberSince: Date,
-    memberUntil: Date,
-    badges: Array<Object>,
-    warnings: Number
-}
+import {IMember} from "../../common/user";
 
 const SMember = new Schema<IMember>(
     {

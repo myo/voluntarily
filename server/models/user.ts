@@ -1,17 +1,6 @@
 import {Schema, model} from 'mongoose'
 import validator from 'validator'
-
-export interface IUser {
-    username: string,
-    email: string,
-    phone: string,
-    password: string,
-    salt: string,
-    isAdmin: boolean,
-    isMod: boolean,
-    isVerified: boolean,
-    isBanned: boolean
-}
+import {IUser} from "../../common/user";
 
 const SUser = new Schema<IUser>(
     {
@@ -26,5 +15,7 @@ const SUser = new Schema<IUser>(
         isBanned: {type: Boolean, default: false}
     }
 );
+
+export {IUser};
 
 export const MUser = model('User', SUser);

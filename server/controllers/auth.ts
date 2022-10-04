@@ -6,6 +6,7 @@ import {IUser, MUser} from '../models/user';
 import { bakeJWT } from "../middleware/jwt";
 import { UnauthorizedError } from "../middleware/errors";
 import { MMember } from "../models/member";
+import { IUserWithProfile } from "../../common/user";
 
 export const checkPassword = (existingUser: any, givenPassword: string) => {
     const hashedPassword = crypto.createHash('sha256').update(givenPassword + existingUser.salt).digest('hex');
@@ -15,7 +16,8 @@ export const checkPassword = (existingUser: any, givenPassword: string) => {
 const authorize = async(user: any, res: express.Response) => {
     const token = bakeJWT({uid: user._id});
     const profile = await MMember.findOne({ownerId: user._id});
-    res.status(200).json({token: token, user: {username: user.username, portrait: profile?.portrait, name: profile?.name, familyName: profile?.familyName, email: user.email, isAdmin: user.isAdmin, isMod: user.isMod, isVerified: user.isVerified, isBanned: user.isBanned }});
+    const userWithProfile = {...user, ...profile} as IUserWithProfile;
+    res.status(200).json({token: token, user: userWithProfile});
 }
 
 export const signIn = async(req: express.Request, res: express.Response) => {

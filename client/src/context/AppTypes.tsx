@@ -1,4 +1,5 @@
 import { AxiosInstance } from "axios";
+import { IUserWithProfile } from "../../../common/user";
 
 export enum ActionType {
     LOADING_START,
@@ -13,7 +14,7 @@ export enum ActionType {
 export interface IState {
     language: string,
     token: string,
-    user: any,
+    user: IUserWithProfile,
     axiosWithBearer?: AxiosInstance | undefined,
     isLoading: boolean,
     showError: boolean,

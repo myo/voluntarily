@@ -10,11 +10,11 @@
     color: Palette.$white;
     height: 3em;
     user-select: none;
-    svg {
-        flex: 0 1 auto;
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
+    a {
+        flex: 1 0;
+        svg {
+            position: absolute;
+        }
     }
     #ConnectArea {
         flex: 0 1 auto;
@@ -24,10 +24,31 @@
             color: Palette.$white;
         }
     }
-    @include Responsive.phone {
-        svg {
-            left: 1.5em;
+    #ConnectedUserArea {
+        display: flex;
+        flex: 0 1;
+        margin: 0.2em 0.5em;
+        #ProfilePicture {
+            flex: 0 1 auto;
+            height: 2.6em;
+            width: 2.6em;
+            animation-duration: 1s;
+            animation-name: BorderLoading;
+            animation-iteration-count: infinite;
+            height: 100%;
+            border-radius: 50%;
         }
+        #UserName {
+            flex: 1 0 auto;
+            margin: 1em 0em 0em 0.3em;
+            span {
+                margin: 1em 0.4em;
+                font-size: 0.6em;
+            }
+        }
+    }
+    @include Responsive.phone {
+
     };
 }
 
@@ -39,4 +60,37 @@
 #NavBarBottomRibbon {
     height: 0.15em;
     background-color: Palette.$blue;
+}
+
+@keyframes BorderLoading {
+    0% {
+        border-top: 2px solid #B840FF;
+        border-right: 2px solid #B840FF;
+        border-bottom: 2px solid #0095ff;
+        border-left: 2px solid #0095ff;
+    }
+    25% {
+        border-top: 2px solid #0095ff;
+        border-right: 2px solid #B840FF;
+        border-bottom: 2px solid #B840FF;
+        border-left: 2px solid #0095ff;
+    }
+    50% {
+        border-top: 2px solid #0095ff;
+        border-right: 2px solid #0095ff;
+        border-bottom: 2px solid #B840FF;
+        border-left: 2px solid #B840FF;
+    }
+    75% {
+        border-top: 2px solid #B840FF;
+        border-right: 2px solid #0095ff;
+        border-bottom: 2px solid #0095ff;
+        border-left: 2px solid #B840FF;
+    }
+    100% {
+        border-top: 2px solid #B840FF;
+        border-right: 2px solid #B840FF;
+        border-bottom: 2px solid #0095ff;
+        border-left: 2px solid #0095ff;
+    }
 }

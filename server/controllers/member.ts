@@ -4,6 +4,7 @@ import { MUser } from '../models/user';
 import { MMember } from '../models/member';
 import { RequestWithUser } from "../types";
 import { UnauthorizedError } from "../middleware/errors";
+import { IUserWithProfile } from "../../common/user";
 
 export const getProfile = (req: express.Request, res: express.Response) => {
     res.send("getProfile NOT IMPLEMENTED");
@@ -44,7 +45,9 @@ export const createProfile = async (req: RequestWithUser, res: express.Response)
     const profile = await MMember.create({ownerId: req.user?.uid, ownerUserName: newUserName, name: name, familyName: familyName, job: job, highschool: highschool, faculty: faculty, facebook: facebook, instagram: instagram, description: description, previousVolunteering: previousVolunteering});
     profile.save();
 
-    res.json({user: {username: user.username, name: name, familyName: familyName, portrait: profile.portrait, email: user.email, isAdmin: user.isAdmin, isMod: user.isMod, isVerified: user.isVerified, isBanned: user.isBanned }});
+    const userWithProfile = {...user, ...profile} as IUserWithProfile;
+
+    res.json({user: userWithProfile});
 }
 
 export const editProfile = (req: express.Request, res: express.Response) => {

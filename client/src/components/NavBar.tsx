@@ -1,7 +1,9 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import "./styles/NavBar.scss"
 import { Logo } from "./Logo";
 import { useAppContext } from "../context/AppContext";
 import { userStrings } from "../i18n";
+import { ProfilePicture } from "./ProfilePicture";
 
 export const NavBar = () => {
 
@@ -14,12 +16,12 @@ export const NavBar = () => {
             <a href="/">
                 <Logo width="3em" height="3em"/>
             </a>
-                {(appContext.state.user.name ? 
-                    <div id="ConnectArea">Hi {appContext.state.user.name}!</div> 
+                {(appContext.state.user.portrait ? 
+                    <div id="ConnectedUserArea"><ProfilePicture portrait={appContext.state.user.portrait}/><div id="UserName">{appContext.state.user.name}<span>&#9660;</span></div></div> 
                 : 
                     <div id="ConnectArea">
                         <a id="ConnectButton" href="/login">{userStrings.connect}</a>
-                        &nbsp;/&nbsp; 
+                        <span>&nbsp;/&nbsp; </span>
                         <a id="RegisterButton" href="/register">{userStrings.signUp}</a>
                     </div>
                 )}
