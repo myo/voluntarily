@@ -4,6 +4,7 @@ import { Logo } from "./Logo";
 import { useAppContext } from "../context/AppContext";
 import { userStrings } from "../i18n";
 import { ProfilePicture } from "./ProfilePicture";
+import { ActionType } from "../context/AppTypes";
 
 export const NavBar = () => {
 
@@ -16,8 +17,8 @@ export const NavBar = () => {
             <a href="/">
                 <Logo width="3em" height="3em"/>
             </a>
-                {(appContext.state.user.portrait ? 
-                    <div id="ConnectedUserArea"><ProfilePicture portrait={appContext.state.user.portrait}/><div id="UserName">{appContext.state.user.name}<span>&#9660;</span></div></div> 
+                {(appContext.state.user && appContext.state.user.name?.length ? 
+                    <div id="ConnectedUserArea" onClick={()=>{appContext.dispatch({type: ActionType.TOGGLE_USER_MENU});}}><ProfilePicture portrait={appContext.state.user.portrait}/><div id="UserName">{appContext.state.user.name}<span>&#9660;</span></div></div> 
                 : 
                     <div id="ConnectArea">
                         <a id="ConnectButton" href="/login">{userStrings.connect}</a>

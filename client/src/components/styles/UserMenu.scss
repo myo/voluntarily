@@ -1,0 +1,23 @@
+@use './variables/Palette.scss';
+@use './variables/Responsive.scss';
+
+#UserMenu {
+    position: absolute;
+    right: 0;
+    left: auto;
+    background-color: Palette.$black;
+    color: white;
+    width: 300px;
+
+    border-left: 2px solid Palette.$blue;
+    border-right: 2px solid Palette.$blue;
+
+    z-index: 999;
+
+    cursor: pointer;
+
+    p {
+        padding: 1em;
+        border-bottom: 2px solid Palette.$blue;
+    }
+}

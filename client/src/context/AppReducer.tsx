@@ -35,6 +35,14 @@ export const reducer = (state: IState, action: IAction) : IState => {
             setLanguage(action.payload.language);
             return {...state, language: action.payload.language}
         }
+        case (ActionType.TOGGLE_USER_MENU): {
+            return {...state, userMenuOpen: !state.userMenuOpen};
+        }
+        case (ActionType.USER_LOGOUT): {
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+            return {...state, user: undefined, token: undefined, axiosWithBearer: undefined, userMenuOpen: false}
+        }
     }
     return state;
 }

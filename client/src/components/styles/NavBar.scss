@@ -28,6 +28,8 @@
         display: flex;
         flex: 0 1;
         margin: 0.2em 0.5em;
+        cursor: pointer;
+        
         #ProfilePicture {
             flex: 0 1 auto;
             height: 2.6em;
@@ -64,33 +66,33 @@
 
 @keyframes BorderLoading {
     0% {
-        border-top: 2px solid #B840FF;
-        border-right: 2px solid #B840FF;
-        border-bottom: 2px solid #0095ff;
-        border-left: 2px solid #0095ff;
+        border-top: 2px solid Palette.$purple;
+        border-right: 2px solid Palette.$purple;
+        border-bottom: 2px solid Palette.$blue;
+        border-left: 2px solid Palette.$blue;
     }
     25% {
-        border-top: 2px solid #0095ff;
-        border-right: 2px solid #B840FF;
-        border-bottom: 2px solid #B840FF;
-        border-left: 2px solid #0095ff;
+        border-top: 2px solid Palette.$blue;
+        border-right: 2px solid Palette.$purple;
+        border-bottom: 2px solid Palette.$purple;
+        border-left: 2px solid Palette.$blue;
     }
     50% {
-        border-top: 2px solid #0095ff;
-        border-right: 2px solid #0095ff;
-        border-bottom: 2px solid #B840FF;
-        border-left: 2px solid #B840FF;
+        border-top: 2px solid Palette.$blue;
+        border-right: 2px solid Palette.$blue;
+        border-bottom: 2px solid Palette.$purple;
+        border-left: 2px solid Palette.$purple;
     }
     75% {
-        border-top: 2px solid #B840FF;
-        border-right: 2px solid #0095ff;
-        border-bottom: 2px solid #0095ff;
-        border-left: 2px solid #B840FF;
+        border-top: 2px solid Palette.$purple;
+        border-right: 2px solid Palette.$blue;
+        border-bottom: 2px solid Palette.$blue;
+        border-left: 2px solid Palette.$purple;
     }
     100% {
-        border-top: 2px solid #B840FF;
-        border-right: 2px solid #B840FF;
-        border-bottom: 2px solid #0095ff;
-        border-left: 2px solid #0095ff;
+        border-top: 2px solid Palette.$purple;
+        border-right: 2px solid Palette.$purple;
+        border-bottom: 2px solid Palette.$blue;
+        border-left: 2px solid Palette.$blue;
     }
 }

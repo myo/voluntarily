@@ -8,7 +8,7 @@ export const HomePage = () => {
     const appContext = useAppContext();
     const navigator = useNavigate();
     useEffect(() => {
-        if (appContext.state.token?.length > 0)
+        if (appContext.state.token?.length)
         {
             if (!appContext.state.user?.username?.length) {
                 navigator("/members/create-profile");

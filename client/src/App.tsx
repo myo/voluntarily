@@ -9,6 +9,7 @@ import { ActionType } from './context/AppTypes';
 import { CreateProfilePage } from './pages/CreateProfilePage';
 import { UploadPortraitPage } from './pages/UploadPortraitPage';
 import { appStrings } from './i18n';
+import { UserMenu } from './components/UserMenu';
 
 function App() {
   const appCtx = useAppContext();
@@ -23,6 +24,7 @@ function App() {
     <div className="App">
       <Router>
         <NavBar/>
+        <UserMenu/>
         <Routes>
           <Route path="/" element={<HomePage/>}/>
           <Route path="/members">

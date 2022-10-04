@@ -9,16 +9,19 @@ export enum ActionType {
     USER_REGISTRATION_ERROR,
     USER_LOGIN_START,
     USER_LOGIN_ERROR,
+    USER_LOGOUT,
     SET_LANGUAGE,
+    TOGGLE_USER_MENU,
 };
 export interface IState {
     language: string,
-    token: string,
-    user: IUserWithProfile,
+    token?: string,
+    user?: IUserWithProfile,
     axiosWithBearer?: AxiosInstance | undefined,
     isLoading: boolean,
     showError: boolean,
     errorMessage: string,
+    userMenuOpen: boolean,
 };
 export interface IAction {
     type: ActionType,

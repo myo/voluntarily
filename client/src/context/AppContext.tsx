@@ -16,6 +16,7 @@ const initialState : IState = {
     isLoading: true,
     showError: false,
     errorMessage: "",
+    userMenuOpen: false
 };
 
 export const AppContext = createContext<AppContextType>({state: initialState, dispatch: () => {}});
