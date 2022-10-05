@@ -27,11 +27,12 @@ export interface IMember {
     description: string,
     previousVolunteering: string,
     rank: string,
-    previousRanks: Array<string>,
+    previousRanks: string[],
     memberSince: Date,
     memberUntil: Date,
-    badges: Array<Object>,
-    warnings: Number
+    badges: object[],
+    warnings: number
+    interviewData: object
 }
 
 export interface IUserWithProfile extends IUser, IMember { }

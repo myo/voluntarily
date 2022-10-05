@@ -1,7 +1,7 @@
 @use "../../components/styles/variables/Palette";
 @use "../../components/styles/variables/Responsive";
 
-.connect {
+.ConnectForm {
 form {
     display:flex;
     flex-direction:column;
@@ -29,6 +29,7 @@ form {
         width: 12em + 6em + 2em + 3em;
         background-color: Palette.$black;
         color: Palette.$white;
+        cursor: pointer;
     }
 }
 }

@@ -13,11 +13,22 @@ export const checkPassword = (existingUser: any, givenPassword: string) => {
     return hashedPassword == existingUser.password;
 };
 
+const sanitizeUserData = (data: any) => {
+    data._id = undefined;
+    data.password = undefined;
+    data.salt = undefined;
+    data.__v = undefined;
+    data.ownerId = undefined;
+    data.ownerUserName = undefined;
+    return data;
+}
+
 const authorize = async(user: any, res: express.Response) => {
     const token = bakeJWT({uid: user._id});
-    const profile = await MMember.findOne({ownerId: user._id});
-    const userWithProfile = {...user, ...profile} as IUserWithProfile;
-    res.status(200).json({token: token, user: userWithProfile});
+    const profile : any = await MMember.findOne({ownerId: user._id});
+    const userWithProfile = { ...user._doc, ...profile._doc} as IUserWithProfile;
+    const sanitizedUserData = sanitizeUserData(userWithProfile);
+    res.status(200).json({token: token, user: sanitizedUserData});
 }
 
 export const signIn = async(req: express.Request, res: express.Response) => {

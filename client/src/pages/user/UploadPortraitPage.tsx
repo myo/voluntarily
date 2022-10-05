@@ -1,9 +1,9 @@
-import "./styles/GeneralForm.scss"
+import "../styles/GeneralForm.scss"
 import { AxiosInstance } from "axios";
-import { useAppContext } from "../context/AppContext";
-import { ActionType } from "../context/AppTypes";
+import { useAppContext } from "../../context/AppContext";
+import { ActionType } from "../../context/AppTypes";
 import { useNavigate } from "react-router-dom";
-import { userStrings } from "../i18n";
+import { userStrings } from "../../i18n";
 
 export const UploadPortraitPage = () => {
     const appContext = useAppContext();

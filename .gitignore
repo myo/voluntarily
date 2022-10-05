@@ -1,6 +1,9 @@
 # The TS build folder
 build/
 
+# public/uploads/, maybe others
+uploads/
+
 # Logs
 logs
 *.log

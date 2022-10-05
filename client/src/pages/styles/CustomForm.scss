@@ -1,0 +1,55 @@
+@use "../../components/styles/variables/Palette";
+@use "../../components/styles/variables/Responsive";
+
+.CustomForm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    form {
+        margin: 1em;
+        padding: 0.8em;
+        color: Palette.$white;
+        background-color: Palette.$black;
+        width: 100%;
+        animation-duration: 5s;
+        animation-name: CustomFormBorder;
+        animation-iteration-count: infinite;
+    }
+
+}
+
+
+
+@keyframes CustomFormBorder {
+    0% {
+        border-top: 2px solid Palette.$purple;
+        border-right: 2px solid Palette.$purple;
+        border-bottom: 2px solid Palette.$blue;
+        border-left: 2px solid Palette.$blue;
+    }
+    25% {
+        border-top: 2px solid Palette.$blue;
+        border-right: 2px solid Palette.$purple;
+        border-bottom: 2px solid Palette.$purple;
+        border-left: 2px solid Palette.$blue;
+    }
+    50% {
+        border-top: 2px solid Palette.$blue;
+        border-right: 2px solid Palette.$blue;
+        border-bottom: 2px solid Palette.$purple;
+        border-left: 2px solid Palette.$purple;
+    }
+    75% {
+        border-top: 2px solid Palette.$purple;
+        border-right: 2px solid Palette.$blue;
+        border-bottom: 2px solid Palette.$blue;
+        border-left: 2px solid Palette.$purple;
+    }
+    100% {
+        border-top: 2px solid Palette.$purple;
+        border-right: 2px solid Palette.$purple;
+        border-bottom: 2px solid Palette.$blue;
+        border-left: 2px solid Palette.$blue;
+    }
+}

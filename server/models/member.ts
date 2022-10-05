@@ -29,6 +29,7 @@ const SMember = new Schema<IMember>(
             image: {type: String, default: ""}
         }],
         warnings: {type: Number, default: 0},
+        interviewData: {type: Object, default: {}},
     }
 );
 

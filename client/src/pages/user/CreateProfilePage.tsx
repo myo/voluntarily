@@ -1,11 +1,11 @@
-import "./styles/GeneralForm.scss"
-import { TextBox } from "../components/TextBox";
+import "../styles/GeneralForm.scss"
+import { TextBox } from "../../components/TextBox";
 import {useState, useContext} from "react";
-import { AppContext } from '../context/AppContext';
-import { ActionType } from "../context/AppTypes";
-import { RichBox } from "../components/RichBox";
+import { AppContext } from '../../context/AppContext';
+import { ActionType } from "../../context/AppTypes";
+import { RichBox } from "../../components/RichBox";
 import { useNavigate } from 'react-router-dom'
-import { userStrings } from "../i18n";
+import { userStrings } from "../../i18n";
 
 const initialState = { name: "", familyName: "", job: "", highschool: "", faculty: "", facebook: "", instagram: "", description: "", previousVolunteering: "" };
 

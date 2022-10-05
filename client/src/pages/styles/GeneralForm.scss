@@ -4,6 +4,8 @@
 $margin-inbetween: 1.5em;
 $submit-width: 70%;
 
+.GeneralForm {
+    
 form {
     margin: 1em 3em 0em 3em;
     .TextBoxComponent {
@@ -47,4 +49,5 @@ form {
         background-color: Palette.$black;
         color: Palette.$white;
     }
+}
 }

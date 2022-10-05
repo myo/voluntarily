@@ -1,11 +1,11 @@
-import "./styles/ConnectForm.scss"
-import { TextBox } from "../components/TextBox";
+import "../styles/ConnectForm.scss"
+import { TextBox } from "../../components/TextBox";
 import {useState} from "react";
 import axios from "axios";
-import { useAppContext } from '../context/AppContext';
-import { ActionType } from "../context/AppTypes";
+import { useAppContext } from '../../context/AppContext';
+import { ActionType } from "../../context/AppTypes";
 import { useNavigate } from 'react-router-dom'
-import { userStrings } from "../i18n";
+import { userStrings } from "../../i18n";
 
 const initialState = { email: "", password: "" };
 
@@ -32,8 +32,8 @@ export const LoginPage = () => {
     };
 
     return (
-    <div className="connect">
-        <form onSubmit={submitHandler}>
+    <div className="ConnectForm">
+        <form autoComplete="off" onSubmit={submitHandler}>
             <TextBox name="email" label={userStrings.email} placeholder="youremail@gmail.com" value={connectData.email} onChange={changeHandler}></TextBox>
             <TextBox type="password" name="password" label={userStrings.password} value={connectData.password} onChange={changeHandler}></TextBox>
             <input type="submit" value={userStrings.connect}></input>

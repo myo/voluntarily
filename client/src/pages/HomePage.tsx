@@ -16,6 +16,9 @@ export const HomePage = () => {
             else if (!appContext.state.user?.portrait.length) {
                 navigator("/members/upload-portrait");
             }
+            else if(appContext.state.user?.isAdmin) {
+                navigator("/admin/settings/interviews/edit-form")
+            }
             
         }
     });

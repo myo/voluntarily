@@ -1,11 +1,11 @@
-import "./styles/ConnectForm.scss"
-import { TextBox } from "../components/TextBox";
+import "../styles/ConnectForm.scss"
+import { TextBox } from "../../components/TextBox";
 import {useState, useContext} from "react";
 import axios from "axios";
-import { AppContext } from '../context/AppContext';
-import { ActionType } from "../context/AppTypes";
+import { AppContext } from '../../context/AppContext';
+import { ActionType } from "../../context/AppTypes";
 import { useNavigate } from 'react-router-dom'
-import { userStrings } from "../i18n";
+import { userStrings } from "../../i18n";
 
 const initialState = { email: "", phone: "", password: "" };
 
@@ -32,8 +32,8 @@ export const RegistrationPage = () => {
     };
 
     return (
-    <div className="connect">
-        <form onSubmit={submitHandler}>
+    <div className="ConnectForm">
+        <form autoComplete="off" onSubmit={submitHandler}>
             <TextBox name="email" label={userStrings.email} placeholder="youremail@gmail.com" value={connectData.email} onChange={changeHandler}></TextBox>
             <TextBox name="phone" label={userStrings.phone} placeholder="0720123456" value={connectData.phone} onChange={changeHandler}></TextBox>
             <TextBox type="password" name="password" label={userStrings.password} value={connectData.password} onChange={changeHandler}></TextBox>

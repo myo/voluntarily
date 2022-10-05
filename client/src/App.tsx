@@ -1,15 +1,16 @@
 import { HomePage } from './pages/HomePage';
-import { RegistrationPage } from './pages/RegistrationPage';
+import { RegistrationPage } from './pages/user/RegistrationPage';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import { NavBar } from './components/NavBar';
-import { LoginPage } from './pages/LoginPage';
+import { LoginPage } from './pages/user/LoginPage';
 import Loading from './components/Loading';
 import { useAppContext } from './context/AppContext';
 import { ActionType } from './context/AppTypes';
-import { CreateProfilePage } from './pages/CreateProfilePage';
-import { UploadPortraitPage } from './pages/UploadPortraitPage';
+import { CreateProfilePage } from './pages/user/CreateProfilePage';
+import { UploadPortraitPage } from './pages/user/UploadPortraitPage';
 import { appStrings } from './i18n';
 import { UserMenu } from './components/UserMenu';
+import { EditInteviewForm } from './pages/admin/EditInterviewForm';
 
 function App() {
   const appCtx = useAppContext();
@@ -27,6 +28,13 @@ function App() {
         <UserMenu/>
         <Routes>
           <Route path="/" element={<HomePage/>}/>
+          <Route path="/admin">
+            <Route path="settings">
+              <Route path="interviews">
+                <Route path="edit-form" element={<EditInteviewForm/>}/>
+              </Route>
+            </Route>
+          </Route>
           <Route path="/members">
             <Route path="create-profile" element={<CreateProfilePage/>}/>
             <Route path="upload-portrait" element={<UploadPortraitPage/>}/>
