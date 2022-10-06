@@ -26,7 +26,7 @@ const sanitizeUserData = (data: any) => {
 const authorize = async(user: any, res: express.Response) => {
     const token = bakeJWT({uid: user._id});
     const profile : any = await MMember.findOne({ownerId: user._id});
-    const userWithProfile = { ...user._doc, ...profile._doc} as IUserWithProfile;
+    const userWithProfile = { ...user._doc, ...(profile?._doc || {})} as IUserWithProfile;
     const sanitizedUserData = sanitizeUserData(userWithProfile);
     res.status(200).json({token: token, user: sanitizedUserData});
 }
