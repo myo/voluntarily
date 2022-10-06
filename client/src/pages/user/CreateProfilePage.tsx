@@ -31,16 +31,16 @@ export const CreateProfilePage = () => {
         });
     };
 
-    return (
-    <form onSubmit={submitHandler}>
-        <TextBox name="name" label={userStrings.name} required={true} placeholder="John" value={profileData.name} onChange={changeHandler}></TextBox>
-        <TextBox name="familyName" label={userStrings.familyName} required={true} placeholder="Smith" value={profileData.familyName} onChange={changeHandler}></TextBox>
-        <TextBox name="faculty" label={userStrings.faculty} placeholder="Medical Faculty" value={profileData.faculty} onChange={changeHandler}></TextBox>
-        <TextBox name="facebook" label={userStrings.facebook} placeholder="https://fb.me/zuck" value={profileData.facebook} onChange={changeHandler}></TextBox>
-        <TextBox name="instagram" label={userStrings.instagram} placeholder="https://www.instagram.com/zuck" value={profileData.instagram} onChange={changeHandler}></TextBox>
-        <RichBox name="description" label={userStrings.description} value={profileData.description} onChange={changeHandler}/>
-        <RichBox name="previousVolunteering" label={userStrings.previousVolunteering} value={profileData.previousVolunteering} onChange={changeHandler}/>
-        <input type="submit" value={userStrings.signUpForInterview}></input>
-    </form>
-    );
+    return (<div className="GeneralForm">
+        <form onSubmit={submitHandler}>
+            <TextBox name="name" label={userStrings.name} required={true} placeholder="John" value={profileData.name} onChange={changeHandler}></TextBox>
+            <TextBox name="familyName" label={userStrings.familyName} required={true} placeholder="Smith" value={profileData.familyName} onChange={changeHandler}></TextBox>
+            <TextBox name="faculty" label={userStrings.faculty} placeholder="Medical Faculty" value={profileData.faculty} onChange={changeHandler}></TextBox>
+            <TextBox name="facebook" label={userStrings.facebook} placeholder="https://fb.me/zuck" value={profileData.facebook} onChange={changeHandler}></TextBox>
+            <TextBox name="instagram" label={userStrings.instagram} placeholder="https://www.instagram.com/zuck" value={profileData.instagram} onChange={changeHandler}></TextBox>
+            <RichBox name="description" label={userStrings.description} value={profileData.description} onChange={changeHandler}/>
+            <RichBox name="previousVolunteering" label={userStrings.previousVolunteering} value={profileData.previousVolunteering} onChange={changeHandler}/>
+            <input type="submit" value={userStrings.signUpForInterview}></input>
+        </form>
+    </div>);
 };
