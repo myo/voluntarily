@@ -3,7 +3,7 @@ import express from "express";
 import { MUser } from '../models/user';
 import { MMember } from '../models/member';
 import { MSetting } from "../models/setting";
-import Badge from '../models/badge';
+import { MBadge } from "../models/badge";
 
 export const getInterviewFormSettings = async (req: express.Request, res: express.Response) => {
     try {

@@ -16,6 +16,6 @@ const SUser = new Schema<IUser>(
     }
 );
 
-export {IUser};
+export { IUser };
 
 export const MUser = model<IUser>('User', SUser);

@@ -10,4 +10,6 @@ const SSetting = new Schema<ISetting>({
     children: {type: Array<IFormElement>}
 });
 
-export const MSetting = model("Setting", SSetting);
+export { ISetting };
+
+export const MSetting = model<ISetting>("Setting", SSetting);

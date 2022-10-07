@@ -5,6 +5,7 @@ import { MMember } from '../models/member';
 import { RequestWithUser } from "../types";
 import { UnauthorizedError } from "../middleware/errors";
 import { IMember, IUser, IUserWithProfile } from "../../common/user";
+import { MFileUpload } from "../models/file";
 
 export const getProfile = (req: express.Request, res: express.Response) => {
     res.send("getProfile NOT IMPLEMENTED");
@@ -50,24 +51,47 @@ export const createProfile = async (req: RequestWithUser, res: express.Response)
     res.json({user: userWithProfile});
 }
 
-export const editProfile = (req: express.Request, res: express.Response) => {
-    res.send("editProfile NOT IMPLEMENTED.");
+export const editProfile = async(req: RequestWithUser, res: express.Response) => {
+    let profile = await MMember.findOne<IMember>({ownerId: req.user?.uid});
+
+    if (!profile) {
+        throw new UnauthorizedError("INVALID_SESSION");
+    }
+
+    profile = {...profile, ...req.body.changes};
+
+    res.json({user: {...req.body.changes}});
+
+    try {
+        profile?.save();
+    }
+    catch(e: any) {
+        res.status(500).json({message: "EDIT_PROFILE_FAILED"})
+    }
 }
 
 export const signUpForEvent = (req: express.Request, res: express.Response) => {
     res.send("signUpForEvent NOT IMPLEMENTED.");
 }
 
-export const uploadPortrait = async(req: RequestWithUser, res: express.Response) => {
-    console.log(req.file, req.body);
-
+export const uploadFile = async(req: RequestWithUser, res: express.Response) => {
     if (req.file) {
-        const profile = await MMember.findOne<IMember>({ownerId: req.user?.uid});
-        if (!profile) {
-            throw new UnauthorizedError("INVALID SESSION.");
-        }
-        profile.portrait = req.file?.filename;
-        profile.save();
-        res.json({user: {portrait: req.file?.filename}});
+
+        MFileUpload.create({
+            userId: req.user?.uid,
+            fieldname: req.file.fieldname,
+            originalname: req.file.originalname,
+            mimetype: req.file.mimetype,
+            filename: req.file.filename,
+            path: req.file.path,
+            size: req.file.size
+        });
+        
+        res.json({file: {
+            filename: req.file.filename, 
+            size: req.file.size
+        }});
     }
+
+    res.status(500).json({message: "FILE_UPLOAD_FAILED"});
 }

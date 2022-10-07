@@ -3,7 +3,7 @@ const router = express.Router();
 import multer from 'multer';
 import path from "path";
 
-import {getProfile, createProfile, editProfile, signUpForEvent, uploadPortrait} from "../controllers/member";
+import {getProfile, createProfile, editProfile, signUpForEvent, uploadFile} from "../controllers/member";
 
 const storage = multer.diskStorage({
     destination: function(req, file, callback) {
@@ -20,6 +20,6 @@ router.route("/get/:id").get(getProfile);
 router.route("/create").post(createProfile);
 router.route("/edit").post(editProfile);
 router.route("/signUpForEvent").post(signUpForEvent);
-router.route("/uploadPortrait").post(upload.single("file"), uploadPortrait);
+router.route("/uploadFile").post(upload.single("file"), uploadFile);
 
 export default router;

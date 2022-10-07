@@ -22,4 +22,6 @@ const SUser = new Schema<IBadge>(
     }
 );
 
+export {IBadge};
+
 export const MBadge = model<IBadge>('Badge', SUser);

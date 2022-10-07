@@ -12,3 +12,13 @@ export interface IFormElement {
     name: string,
     required: boolean,
 }
+
+export interface IFileUpload {
+    userId: string,
+    fieldname: string,
+    originalname: string,
+    mimetype: string,
+    filename: string,
+    path: string,
+    size: number
+}
