@@ -33,4 +33,4 @@ const SMember = new Schema<IMember>(
     }
 );
 
-export const MMember = model('Member', SMember);
+export const MMember = model<IMember>('Member', SMember);

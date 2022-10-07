@@ -6,9 +6,9 @@ import {IUser, MUser} from '../models/user';
 import { bakeJWT } from "../middleware/jwt";
 import { UnauthorizedError } from "../middleware/errors";
 import { MMember } from "../models/member";
-import { IUserWithProfile } from "../../common/user";
+import { IMember, IUserWithProfile } from "../../common/user";
 
-export const checkPassword = (existingUser: any, givenPassword: string) => {
+export const checkPassword = (existingUser: IUser, givenPassword: string) => {
     const hashedPassword = crypto.createHash('sha256').update(givenPassword + existingUser.salt).digest('hex');
     return hashedPassword == existingUser.password;
 };
@@ -23,18 +23,18 @@ const sanitizeUserData = (data: any) => {
     return data;
 }
 
-const authorize = async(user: any, res: express.Response) => {
+const authorize = async(user: IUser, res: express.Response) => {
     const token = bakeJWT({uid: user._id});
-    const profile : any = await MMember.findOne({ownerId: user._id});
-    const userWithProfile = { ...user._doc, ...(profile?._doc || {})} as IUserWithProfile;
+    const profile : IMember = await MMember.findOne({ownerId: user._id}) as IMember;
+    const userWithProfile = { ...user.toObject(), ...(profile?.toObject() || {})} as IUserWithProfile;
     const sanitizedUserData = sanitizeUserData(userWithProfile);
     res.status(200).json({token: token, user: sanitizedUserData});
 }
 
-export const signIn = async(req: express.Request, res: express.Response) => {
+export const signIn = async (req: express.Request, res: express.Response) => {
     const {email, password} = req.body;
 
-    const existingUser = await MUser.findOne({email: email});
+    const existingUser = await MUser.findOne<IUser>({email: email});
     
     if (existingUser && checkPassword(existingUser, password)) {
         await authorize(existingUser, res);

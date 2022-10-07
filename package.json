@@ -18,6 +18,7 @@
   "dependencies": {
     "@types/react-dropzone": "^5.1.0",
     "concurrently": "^7.4.0",
+    "mongoose": "^6.6.5",
     "react-dropzone": "^14.2.2"
   }
 }

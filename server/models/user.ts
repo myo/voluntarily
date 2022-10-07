@@ -1,6 +1,6 @@
-import {Schema, model} from 'mongoose'
+import { Schema, model } from 'mongoose'
 import validator from 'validator'
-import {IUser} from "../../common/user";
+import { IUser } from "../../common/user";
 
 const SUser = new Schema<IUser>(
     {
@@ -18,4 +18,4 @@ const SUser = new Schema<IUser>(
 
 export {IUser};
 
-export const MUser = model('User', SUser);
+export const MUser = model<IUser>('User', SUser);

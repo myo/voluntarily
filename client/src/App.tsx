@@ -17,10 +17,6 @@ function App() {
 
   window.addEventListener("load", () => {appCtx.dispatch({type: ActionType.LOADING_COMPLETE})});
 
-  if (appCtx.state.isLoading) {
-    return (<Loading text={appStrings.loading} opacity={0}/>)
-  }
-
   return (
     <div className="App">
       <Router>

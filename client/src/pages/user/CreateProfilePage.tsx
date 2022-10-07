@@ -1,23 +1,59 @@
 import "../styles/GeneralForm.scss"
 import { TextBox } from "../../components/TextBox";
-import {useState, useContext} from "react";
+import {useState, useContext, useEffect} from "react";
 import { AppContext } from '../../context/AppContext';
 import { ActionType } from "../../context/AppTypes";
 import { RichBox } from "../../components/RichBox";
 import { useNavigate } from 'react-router-dom'
 import { userStrings } from "../../i18n";
+import { AxiosInstance } from "axios";
+import Loading from "../../components/Loading";
 
-const initialState = { name: "", familyName: "", job: "", highschool: "", faculty: "", facebook: "", instagram: "", description: "", previousVolunteering: "" };
 
-export const CreateProfilePage = () => { 
-    const [profileData, setprofileData] = useState(initialState);
+export interface IFormElement {
+    type: string,
+    name: string,
+    required: boolean,
+}
+
+export interface ISetting {
+    name: string,
+    active: boolean,
+    props: object,
+    children: IFormElement[]
+}
+
+export const CreateProfilePage = () => {
+    //settings received from server
+    const [formFields, setFormFields]  = useState<ISetting>({name: "", active: false, props: {}, children: []});
+
+    //user input to send to server
+    const [profileData, setProfileData] = useState({});
     
     const appContext = useContext(AppContext);
-
     const navigate = useNavigate();
+    const axios = (appContext.state.axiosWithBearer as AxiosInstance);
     
+    useEffect(() => {
+        if (!formFields.name.length)
+        {
+            appContext.dispatch({type:ActionType.LOADING_START})
+            axios.get(process.env.REACT_APP_API_URL + "/api/v1/setting/get/InterviewForm").then(
+                (data) => {
+                    setFormFields(data.data);
+                }).finally(() => {
+                    appContext.dispatch({type: ActionType.LOADING_COMPLETE});
+            });
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [axios, formFields]);
+
+    if (appContext.state.isLoading) {
+        return <Loading text="Loading..."></Loading>
+    }
+
     const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setprofileData({...profileData, [e.target.name]: e.target.value});
+        setProfileData({...profileData, [e.target.name]: e.target.value});
     };
 
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
@@ -31,15 +67,46 @@ export const CreateProfilePage = () => {
         });
     };
 
+    
+
+    const fieldElements = [];
+    
+    for (let i = 0; i < formFields.children.length; i++) {
+        const currentElement = formFields.children[i];
+        if (!Object.keys(profileData).includes(currentElement.name)) {
+            setProfileData({...profileData, [currentElement.name]: ""});
+        }
+        switch (currentElement.type) {
+            case "TextBox": {
+                fieldElements.push(
+                    <TextBox
+                    key={currentElement.name}
+                    name={currentElement.name}
+                    label={userStrings.getString(currentElement.name)} 
+                    required={currentElement.required} 
+                    value={profileData[currentElement.name as keyof object]}
+                    onChange={changeHandler}/>)
+                break;
+            }
+            case "RichBox": {
+                fieldElements.push(
+                    <RichBox
+                    key={currentElement.name}
+                    name={currentElement.name}
+                    label={userStrings.getString(currentElement.name)} 
+                    required={currentElement.required} 
+                    value={profileData[currentElement.name as keyof object]}
+                    onChange={changeHandler}/>);
+                break;
+            }
+        }
+    }
+
+
+
     return (<div className="GeneralForm">
         <form onSubmit={submitHandler}>
-            <TextBox name="name" label={userStrings.name} required={true} placeholder="John" value={profileData.name} onChange={changeHandler}></TextBox>
-            <TextBox name="familyName" label={userStrings.familyName} required={true} placeholder="Smith" value={profileData.familyName} onChange={changeHandler}></TextBox>
-            <TextBox name="faculty" label={userStrings.faculty} placeholder="Medical Faculty" value={profileData.faculty} onChange={changeHandler}></TextBox>
-            <TextBox name="facebook" label={userStrings.facebook} placeholder="https://fb.me/zuck" value={profileData.facebook} onChange={changeHandler}></TextBox>
-            <TextBox name="instagram" label={userStrings.instagram} placeholder="https://www.instagram.com/zuck" value={profileData.instagram} onChange={changeHandler}></TextBox>
-            <RichBox name="description" label={userStrings.description} value={profileData.description} onChange={changeHandler}/>
-            <RichBox name="previousVolunteering" label={userStrings.previousVolunteering} value={profileData.previousVolunteering} onChange={changeHandler}/>
+            {fieldElements}
             <input type="submit" value={userStrings.signUpForInterview}></input>
         </form>
     </div>);

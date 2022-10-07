@@ -1,6 +1,6 @@
-import {Schema, model} from 'mongoose'
+import {Schema, model, Document} from 'mongoose'
 
-interface IBadge {
+interface IBadge extends Document {
     name: string,
     slug: string,
     description: string,
@@ -22,6 +22,4 @@ const SUser = new Schema<IBadge>(
     }
 );
 
-const MUser = model<IBadge>('Badge', SUser);
-
-export default model;
+export const MBadge = model<IBadge>('Badge', SUser);

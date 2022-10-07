@@ -1,4 +1,6 @@
-export interface IUser {
+import { Document } from "mongoose"
+
+export interface IUser extends Document {
     username: string,
     email: string,
     phone: string,
@@ -10,7 +12,7 @@ export interface IUser {
     isBanned: boolean
 }
 
-export interface IMember {
+export interface IMember extends Document {
     ownerId: string,
     ownerUserName: string,
     name: string,

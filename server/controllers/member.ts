@@ -4,7 +4,7 @@ import { MUser } from '../models/user';
 import { MMember } from '../models/member';
 import { RequestWithUser } from "../types";
 import { UnauthorizedError } from "../middleware/errors";
-import { IUserWithProfile } from "../../common/user";
+import { IMember, IUser, IUserWithProfile } from "../../common/user";
 
 export const getProfile = (req: express.Request, res: express.Response) => {
     res.send("getProfile NOT IMPLEMENTED");
@@ -21,7 +21,7 @@ export const createProfile = async (req: RequestWithUser, res: express.Response)
     let newUserName = name + "-" + familyName;
     newUserName = newUserName.toLowerCase();
 
-    const user = await MUser.findOne({_id: req.user?.uid});
+    const user = await MUser.findOne<IUser>({_id: req.user?.uid});
 
     if (!user) {
         throw new UnauthorizedError("You are not logged in.");
@@ -32,7 +32,7 @@ export const createProfile = async (req: RequestWithUser, res: express.Response)
         return;
     }
 
-    const userNameExists = await MUser.findOne({username: newUserName});
+    const userNameExists = await MUser.findOne<IUser>({username: newUserName});
 
     if (userNameExists)
     {
@@ -62,7 +62,7 @@ export const uploadPortrait = async(req: RequestWithUser, res: express.Response)
     console.log(req.file, req.body);
 
     if (req.file) {
-        const profile = await MMember.findOne({ownerId: req.user?.uid});
+        const profile = await MMember.findOne<IMember>({ownerId: req.user?.uid});
         if (!profile) {
             throw new UnauthorizedError("INVALID SESSION.");
         }

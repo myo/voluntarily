@@ -9,11 +9,11 @@ interface Props {
     onChange?: any
 }
 
-export const TextBox = ({name, label="", placeholder="", type="text", value="", required=false, onChange=()=>{}}: Props) => {
+export const TextBox = ({name, label="", type="text", value="", required=false, onChange=()=>{}}: Props) => {
     return (
         <div className="TextBoxComponent">
             <label htmlFor={name}>{(label.length > 0 ? label : name)}{(required) ? <span className="required">*</span> : "" }</label>
-            <input type={type} name={name} id={name} placeholder={placeholder} value={value} onChange={onChange}/>
+            <input type={type} name={name} id={name} value={value} onChange={onChange}/>
         </div>
     );
 };
