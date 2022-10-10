@@ -1,7 +1,6 @@
 import express from "express";
 
 import { MUser } from '../models/user';
-import { MMember } from '../models/member';
 import { MSetting } from "../models/setting";
 import { MBadge } from "../models/badge";
 

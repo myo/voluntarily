@@ -29,16 +29,6 @@ export const installForms = async () => {
         children: [
             {
                 type: "TextBox",
-                name: "name",
-                required: true,
-            },
-            {
-                type: "TextBox",
-                name: "familyName",
-                required: true,
-            },
-            {
-                type: "TextBox",
                 name: "highschool",
                 required: false,
             },

@@ -1,10 +1,9 @@
 import express from "express";
 
 import { MUser } from '../models/user';
-import { MMember } from '../models/member';
 import { RequestWithUser } from "../types";
 import { UnauthorizedError } from "../middleware/errors";
-import { IMember, IUser, IUserWithProfile } from "../../common/user";
+import { IUser } from "../../common/user";
 import { MFileUpload } from "../models/file";
 
 export const getProfile = (req: express.Request, res: express.Response) => {
@@ -12,10 +11,13 @@ export const getProfile = (req: express.Request, res: express.Response) => {
 }
 
 export const createProfile = async (req: RequestWithUser, res: express.Response) => {
-    const {name, familyName, job, highschool, faculty, facebook, instagram, description, previousVolunteering} = req.body;
+    const {name, familyName} = req.body;
+    const interviewData = req.body;
+    interviewData.name = undefined;
+    interviewData.familyName = undefined;
 
     if (!name?.length || !familyName?.length) {
-        res.json({message: "Please fill in your name."});
+        res.json({message: "NAME_EMPTY"});
         return;
     }
 
@@ -25,11 +27,11 @@ export const createProfile = async (req: RequestWithUser, res: express.Response)
     const user = await MUser.findOne<IUser>({_id: req.user?.uid});
 
     if (!user) {
-        throw new UnauthorizedError("You are not logged in.");
+        throw new UnauthorizedError("NOT_LOGGED_IN");
     }
 
     if (user.username?.length > 1) {
-        res.json({message: "You have already created your profile."})
+        res.json({message: "PROFILE_EXISTS"})
         return;
     }
 
@@ -42,28 +44,32 @@ export const createProfile = async (req: RequestWithUser, res: express.Response)
     }
     
     user.username = newUserName;
+    user.name = name;
+    user.familyName = familyName;
+    user.interviewData = interviewData;
     user.save();
-    const profile = await MMember.create({ownerId: req.user?.uid, ownerUserName: newUserName, name: name, familyName: familyName, job: job, highschool: highschool, faculty: faculty, facebook: facebook, instagram: instagram, description: description, previousVolunteering: previousVolunteering});
-    profile.save();
 
-    const userWithProfile = {...user, ...profile} as IUserWithProfile;
-
-    res.json({user: userWithProfile});
+    res.json({user: user});
 }
 
 export const editProfile = async(req: RequestWithUser, res: express.Response) => {
-    let profile = await MMember.findOne<IMember>({ownerId: req.user?.uid});
+    let user = await MUser.findOne<IUser>({_id: req.user?.uid});
 
-    if (!profile) {
+    if (!user) {
         throw new UnauthorizedError("INVALID_SESSION");
     }
 
-    profile = {...profile, ...req.body.changes};
+    let changes = req.body.changes;
+    changes._id = undefined;
+    changes.isAdmin = undefined;
+    changes.isMod = undefined;
+
+    user = {...user, ...req.body.changes};
 
     res.json({user: {...req.body.changes}});
 
     try {
-        profile?.save();
+        user?.save();
     }
     catch(e: any) {
         res.status(500).json({message: "EDIT_PROFILE_FAILED"})

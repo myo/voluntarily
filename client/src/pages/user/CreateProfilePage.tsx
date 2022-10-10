@@ -28,7 +28,7 @@ export const CreateProfilePage = () => {
     const [formFields, setFormFields]  = useState<ISetting>({name: "", active: false, props: {}, children: []});
 
     //user input to send to server
-    const [profileData, setProfileData] = useState({});
+    const [profileData, setProfileData] = useState({name: "", familyName: ""});
     
     const appContext = useContext(AppContext);
     const navigate = useNavigate();
@@ -106,6 +106,8 @@ export const CreateProfilePage = () => {
 
     return (<div className="GeneralForm">
         <form onSubmit={submitHandler}>
+            <TextBox name="name" label={userStrings.name} required={true} placeholder="John" value={profileData.name} onChange={changeHandler}></TextBox>
+            <TextBox name="familyName" label={userStrings.familyName} required={true} placeholder="Smith" value={profileData.familyName} onChange={changeHandler}></TextBox>
             {fieldElements}
             <input type="submit" value={userStrings.signUpForInterview}></input>
         </form>
