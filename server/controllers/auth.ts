@@ -19,7 +19,7 @@ const authorize = async(user: IUser, res: express.Response) => {
 export const signIn = async (req: express.Request, res: express.Response) => {
     const {email, password} = req.body;
 
-    const existingUser = await MUser.findOne<IUser>({email: email}).select("+password +salt");
+    const existingUser = await MUser.findOne<IUser>({email: email}).select("+email +password +salt");
     
     if (existingUser && existingUser.checkPassword(password)) {
         await authorize(existingUser, res);

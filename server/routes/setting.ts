@@ -1,7 +1,10 @@
 import express from "express";
+import {getSetting, changeSetting} from "../controllers/setting"
 const router = express.Router();
 
-import {getSetting, changeSetting} from "../controllers/setting"
+/* site-wide settings, translations
+ * and loadable forms
+ */
 
 router.route("/get/:name").get(getSetting);
 router.route("/change").post(changeSetting);

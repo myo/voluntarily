@@ -1,7 +1,8 @@
 import express from "express";
+import {signIn, signUp} from "../controllers/auth"
 const router = express.Router();
 
-import {signIn, signUp} from "../controllers/auth"
+/* routes serving authentication go here */
 
 router.route("/register").post(signUp);
 router.route("/login").post(signIn);

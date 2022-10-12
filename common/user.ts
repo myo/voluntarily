@@ -18,6 +18,7 @@ export interface IUser extends Document {
     isBanned: boolean,
     rank: string,
     previousRanks: string[],
+    interviewDate: Date,
     memberSince: Date,
     memberUntil: Date,
     badges: object[],

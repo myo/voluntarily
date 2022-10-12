@@ -1,9 +1,10 @@
 
-import jwt, { JwtPayload, TokenExpiredError } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import express from "express";
 
-export interface RequestWithUser extends express.Request {
-    user?: {uid: string}
+export interface CustomRequest extends express.Request {
+    user?: {uid: string},
+    options?: object,
 }
 
 export interface PayloadWithBakedContents extends jwt.JwtPayload {
