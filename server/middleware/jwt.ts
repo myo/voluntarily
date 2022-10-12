@@ -1,5 +1,5 @@
 
-import jwt, { JwtPayload, TokenExpiredError } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import express from "express";
 import { UnauthorizedError } from "./errors";
 import { RequestWithUser, PayloadWithBakedContents } from "../types";
@@ -22,7 +22,3 @@ export const verifyJWT = (req: RequestWithUser, res: express.Response, next: exp
         throw new UnauthorizedError(UnauthorizedErrorMessage);
     }
 }
-
-export const bakeJWT = (secret: Object): string => {
-    return jwt.sign(secret, process.env.JWT_SECRET || "", {expiresIn: process.env.JWT_LIFE})
-};

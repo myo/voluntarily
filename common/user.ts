@@ -1,6 +1,7 @@
 import { Document } from "mongoose"
 
 export interface IUser extends Document {
+    [x: string]: any
     username: string,
     name: string,
     familyName: string,
@@ -21,5 +22,7 @@ export interface IUser extends Document {
     memberUntil: Date,
     badges: object[],
     warnings: number,
-    interviewData: object
+    interviewData: object,
+    checkPassword: (password:string)=>boolean,
+    getJWT: ()=>string,
 }
