@@ -11,19 +11,22 @@ export const UploadPortraitPage = () => {
   const navigator = useNavigate();
 
   const photoHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+
+    const axios = appContext.state.axiosWithBearer as AxiosInstance;
     const file = (e.target.files as FileList)[0];
 
     const formData = new FormData();
     formData.append("file", file);
 
-    (appContext.state.axiosWithBearer as AxiosInstance)
+    axios
       .post(
         process.env.REACT_APP_API_URL + "/api/v1/member/uploadFile",
         formData
       )
       .then((res) => {
         if (res.data) {
-          (appContext.state.axiosWithBearer as AxiosInstance)
+          axios
             .post(process.env.REACT_APP_API_URL + "/api/v1/member/edit", {
               changes: {
                 portrait: res.data.file.filename,

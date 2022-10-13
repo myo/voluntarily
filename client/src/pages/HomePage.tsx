@@ -11,10 +11,12 @@ export const HomePage = () => {
   const appContext = useAppContext();
   const navigator = useNavigate();
   const [isLoading, setLoading] = useState<boolean>(true);
-  const [members, setMembers] = useState<Array<any>>([]);
+  const [members, setMembers] = useState<Array<any>>(["LOAD_ONCE"]);
 
   useEffect(() => {
     if (appContext.state.token?.length) {
+      // user is logged in, check if they took
+      // all required steps to sign up
       if (!appContext.state.user?.username?.length) {
         navigator("/members/create-profile");
       } else if (!appContext.state.user?.portrait.length) {
@@ -23,16 +25,29 @@ export const HomePage = () => {
         navigator("/admin/settings/interviews/edit-form");
       }
     }
-    if (members.length === 0) {
+    // to be 100% sure we don't request this more
+    // than once, we add a bogus initial member
+    if (members[0] === "LOAD_ONCE") {
+      members.pop(); // that we now remove
+      // and proceed to fetch members to display
+      // as MemberCards
       axios
         .get(process.env.REACT_APP_API_URL + "/api/v1/public/members/get")
         .then((res: AxiosResponse) => {
+          // if you're new to react, this method
+          // we get from useState, won't work
+          // immediately, that's why we're not
+          // setting isLoading to false here.
           setMembers(res.data);
         });
-    } else {
+    } else if (members.length !== 0) {
+      // members array is populated and first
+      // member isn't "LOAD_ONCE", let's show
+      // the member cards
       setLoading(false);
     }
   }, [members, isLoading, appContext.state.token]);
+
   if (isLoading) {
     return (
       <div>
@@ -45,6 +60,8 @@ export const HomePage = () => {
     );
   }
 
+  // #TODO: make this parent div a component,
+  // MemberCardsContainer
   return (
     <div style={{ display: "flex", flexWrap: "wrap" }}>
       {members.map((member, index) => {
