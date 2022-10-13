@@ -1,0 +1,30 @@
+@use './variables/Palette.scss';
+@use './variables/Responsive.scss';
+
+.MemberCard {
+    display: flex;
+    flex-wrap:wrap;
+    align-items: center;
+    justify-content: center;
+    margin: 1.5%;
+    padding: 1%;
+    width: 30.333%;
+    border: 1px solid Palette.$purple;
+    border-radius: 0.76em;
+    cursor: pointer;
+    .MemberCard-Details {
+        .MemberCard-Details-Name {
+            font-weight: 700;
+            color: Palette.$blue;
+        }
+        .MemberCard-Details-Rank {
+            font-size: 0.85em;
+        }
+        text-align:center;
+    }
+    img {
+        height: 6em;
+        width: auto;
+        margin: 1em;
+    }
+}

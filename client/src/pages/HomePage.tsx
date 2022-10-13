@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../context/AppContext";
 import { appStrings } from "../i18n";
 import axios, { AxiosResponse } from "axios";
-import { MemberSummary } from "../components/MemberSummary";
+import { MemberCard } from "../components/MemberCard";
+import { findByLabelText } from "@testing-library/react";
 
 export const HomePage = () => {
   const appContext = useAppContext();
@@ -45,17 +46,18 @@ export const HomePage = () => {
   }
 
   return (
-    <div>
+    <div style={{ display: "flex", flexWrap: "wrap" }}>
       {members.map((member, index) => {
         return (
-          <MemberSummary
+          <MemberCard
             key={index}
             username={member.username}
             name={member.name}
             familyName={member.familyName}
+            rank={member.rank}
             portrait={member.portrait}
             isAlumni={member.isAlumni}
-          ></MemberSummary>
+          ></MemberCard>
         );
       })}
     </div>
